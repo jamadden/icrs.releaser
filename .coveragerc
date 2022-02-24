@@ -1,5 +1,5 @@
 [run]
-source = nti.webhooks
+source_pkgs = icrs.releaser
 # New in 5.0; required for the GHA coveralls submission.
 # Perhaps this obsoletes the source section in [paths]?
 relative_files = True

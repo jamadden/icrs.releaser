@@ -64,7 +64,10 @@ def prereleaser_middle(data): # pragma: no cover
     if not os.path.exists(base_dir):
         raise Exception(f"Unable to find source directory at {base_dir!r}")
 
-    for path in glob.iglob(os.path.join(base_dir, '*.py'), recursive=True):
+    pattern = os.path.join(base_dir, "*.py")
+    print("Searching for", pattern)
+    for path in glob.iglob(pattern, recursive=True):
+        print(path)
         with open(path, 'rb') as f:
             contents = f.read()
         new_contents, count = regex.subn(replacement, contents)

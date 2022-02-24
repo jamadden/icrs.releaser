@@ -46,6 +46,9 @@ def prereleaser_middle(data): # pragma: no cover
     .. versionadded:: NEXT
     """
     project_name = data['name']
+    if '.' in project_name:
+        # Namespace packages
+        project_name = project_name.split('.')[0]
     new_version = data['new_version']
 
     # Put the version number in source files.

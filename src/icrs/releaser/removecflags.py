@@ -11,6 +11,8 @@ def prereleaser_before(data): # pragma: no cover pylint:disable=unused-argument
     """
     Strip CFLAGS and other compile settings that
     may not be portable.
+
+    .. versionadded:: NEXT
     """
     # Especially CFLAGS. If this is compiled in a newer machine with a
     # setting like -march=native, it will produce wheels that won't

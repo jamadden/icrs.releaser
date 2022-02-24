@@ -42,6 +42,8 @@ def prereleaser_middle(data): # pragma: no cover
       ``data['name']`` which in turn comes from setup.py.
 
     .. todo: This does not look at .rst files in the ``docs/`` directory.
+
+    .. versionadded:: NEXT
     """
     project_name = data['name']
     new_version = data['new_version']

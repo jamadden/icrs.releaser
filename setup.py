@@ -12,8 +12,15 @@ entry_points = {
         'rm_cflags = icrs.releaser.removecflags:prereleaser_before',
     ],
     'zest.releaser.prereleaser.middle': [
-        'version_next = icrs.releaser.versionreplacer:prereleaser_middle'
+        'version_next = icrs.releaser.versionreplacer:prereleaser_middle',
     ],
+    'zest.releaser.release_before': [
+        'scm_before = icrs.releaser.setuptools_scm_versionfixer:release_before',
+    ]
+
+    'zest.releaser.release_middle': [
+        'scm_middle = icrs.releaser.setuptools_scm_versionfixer:release_middle',
+    ]
 }
 
 TESTS_REQUIRE = [

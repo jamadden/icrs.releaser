@@ -7,6 +7,13 @@ from setuptools import setup, find_packages
 version = '0.0.1.dev0'
 
 entry_points = {
+    'zest.releaser.prereleaser.before': [
+        # XXX: This only works doing fullrelease
+        'rm_cflags = icrs.releaser.removecflags:prereleaser_before',
+    ],
+    'zest.releaser.prereleaser.middle': [
+        'version_next = icrs.releaser.versionreplacer:prereleaser_middle'
+    ],
 }
 
 TESTS_REQUIRE = [

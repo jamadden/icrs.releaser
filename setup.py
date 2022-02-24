@@ -14,10 +14,10 @@ entry_points = {
     'zest.releaser.prereleaser.middle': [
         'version_next = icrs.releaser.versionreplacer:prereleaser_middle',
     ],
-    'zest.releaser.release_before': [
+    'zest.releaser.release.before': [
         'scm_before = icrs.releaser.setuptools_scm_versionfixer:release_before',
     ],
-    'zest.releaser.release_middle': [
+    'zest.releaser.release.middle': [
         'scm_middle = icrs.releaser.setuptools_scm_versionfixer:release_middle',
     ],
 }

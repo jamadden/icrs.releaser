@@ -43,7 +43,7 @@ def prereleaser_middle(data): # pragma: no cover
 
     .. todo: This does not look at .rst files in the ``docs/`` directory.
 
-    .. versionadded:: NEXT
+    .. versionadded:: 0.0.1
     """
     project_name = data['name']
     if '.' in project_name:
@@ -64,7 +64,7 @@ def prereleaser_middle(data): # pragma: no cover
     if not os.path.exists(base_dir):
         raise Exception(f"Unable to find source directory at {base_dir!r}")
 
-    pattern = os.path.join(base_dir, "*.py")
+    pattern = os.path.join(base_dir, "**/*.py")
     print("Searching for", pattern)
     for path in glob.iglob(pattern, recursive=True):
         print(path)

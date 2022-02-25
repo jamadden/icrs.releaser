@@ -1,17 +1,24 @@
 # -*- coding: utf-8 -*-
 """
-See `release_middle`.
+See `prereleaser_middle`.
 
 """
 
+import os
+import sys
 
-logger = __import__('logging').getLogger(__name__)
+def prereleaser_middle(data):
+    """
+    Sets the ``SETUPTOOLS_SCM_PRETEND_VERSION`` environment variable
+    to the value of ``new_version`` in the *data* dictionary.
 
-def release_before(data):
-    print("BEFORE")
-    print(data)
-
-def release_middle(data):
-    print("MIDDLE")
-    print(data)
-    raise Exception
+    When run as part of a fullrelease, this will ensure that
+    ``setuptools_scm`` does what the user wants. Otherwise, in the
+    ``release`` step that follows this, ``zest.releaser`` will ask
+    ``setuptools`` for the version to use, expecting to get back what
+    it has stored in the ``setup.py`` file as part of the
+    ``prerelease`` step. But ``setuptools_scm`` will ignore that.
+    """
+    print("Setting SETUPTOOLS_SCM_PRETEND_VERSION to", repr(data['new_version']),
+          file=sys.stderr)
+    os.environ['SETUPTOOLS_SCM_PRETEND_VERSION'] = data['new_version']

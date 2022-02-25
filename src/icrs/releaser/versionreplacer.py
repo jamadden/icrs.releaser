@@ -8,10 +8,9 @@ See `prereleaser_middle`.
 import re
 import os
 import os.path
+import sys
 import glob
 
-
-logger = __import__('logging').getLogger(__name__)
 
 def prereleaser_middle(data): # pragma: no cover
     """
@@ -31,7 +30,7 @@ def prereleaser_middle(data): # pragma: no cover
         * No filesystem changes have been made yet.
 
 
-    This hooks:
+    This hook:
 
     - Adds the version number to ``versionadded``, ``versionchanged`` and
       ``deprecated`` directives in Python source.
@@ -65,13 +64,12 @@ def prereleaser_middle(data): # pragma: no cover
         raise Exception(f"Unable to find source directory at {base_dir!r}")
 
     pattern = os.path.join(base_dir, "**/*.py")
-    print("Searching for", pattern)
     for path in glob.iglob(pattern, recursive=True):
         print(path)
         with open(path, 'rb') as f:
             contents = f.read()
         new_contents, count = regex.subn(replacement, contents)
         if count:
-            print("Replaced version NEXT in", path)
+            print("Replaced version NEXT in", path, file=sys.stderr)
             with open(path, 'wb') as f:
                 f.write(new_contents)

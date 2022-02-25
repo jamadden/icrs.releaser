@@ -4,7 +4,7 @@ import codecs
 from setuptools import setup, find_packages
 
 
-version = '0.0.1'
+version = '0.0.2'
 
 entry_points = {
     'zest.releaser.prereleaser.before': [
@@ -13,12 +13,8 @@ entry_points = {
     ],
     'zest.releaser.prereleaser.middle': [
         'version_next = icrs.releaser.versionreplacer:prereleaser_middle',
-    ],
-    'zest.releaser.releaser.before': [
-        'scm_before = icrs.releaser.setuptools_scm_versionfixer:release_before',
-    ],
-    'zest.releaser.releaser.middle': [
-        'scm_middle = icrs.releaser.setuptools_scm_versionfixer:release_middle',
+        # XXX: This only works doing fullrelease
+        'scm_middle = icrs.releaser.setuptools_scm_versionfixer:prereleaser_middle',
     ],
 }
 

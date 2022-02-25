@@ -85,6 +85,13 @@ when it is installed, so it is only necessary to ``pip install
 icrs.releaser`` and then invoke ``icrs_release`` to use the plugins
 mentioned above.
 
+This package provides the ``recommended`` extra to install the same
+things that ``zest.releaser[recommended]`` does.
+
+.. code-block:: console
+
+   $ pip install 'icrs.releaser[recommended]'
+
 .. important::
 
    This package assumes that your project uses the standard ``src/``

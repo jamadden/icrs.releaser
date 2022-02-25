@@ -73,6 +73,9 @@ setup(
             'furo',
             'sphinxcontrib-programoutput',
         ] + TESTS_REQUIRE,
+        'recommended': [
+            'zest.releaser[recommended]',
+        ],
     },
     python_requires=">=3.8",
 )

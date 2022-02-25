@@ -63,12 +63,14 @@ class TestFuncs(unittest.TestCase):
         os.makedirs(src)
         path = os.path.join(src, 'foo.py')
         with open(path, 'w', encoding='utf-8') as f:
-            f.write(textwrap.dedent("""\
-            .. versionchanged:: NEXT
-            .. deprecated:: NEXT
-            .. versionadded:: NEXT
-            .. versionnotmatched:: NEXT
-            ..versionchanged:: NEXT
+            # defeat the replacement in this file!
+            next = "NEXT"
+            f.write(textwrap.dedent(f"""\
+            .. versionchanged:: {next}
+            .. deprecated:: {next}
+            .. versionadded:: {next}
+            .. versionnotmatched:: {next}
+            ..versionchanged:: {next}
             """))
 
         reports = []

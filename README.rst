@@ -8,8 +8,8 @@
 .. image:: https://coveralls.io/repos/github/jamadden/icrs.releaser/badge.svg?branch=master
    :target: https://coveralls.io/github/jamadden/icrs.releaser?branch=master
 
-.. image:: https://readthedocs.org/projects/icrs.releaser/badge/?version=latest
-   :target: https://icrs.releaser.readthedocs.io/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/icrsreleaser/badge/?version=latest
+   :target: https://icrsreleaser.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
 
 

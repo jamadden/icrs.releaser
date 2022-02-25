@@ -19,6 +19,7 @@ def prereleaser_middle(data):
     it has stored in the ``setup.py`` file as part of the
     ``prerelease`` step. But ``setuptools_scm`` will ignore that.
     """
-    print("Setting SETUPTOOLS_SCM_PRETEND_VERSION to", repr(data['new_version']),
-          file=sys.stderr)
+    report = data.get('icrs.releaser:report', print)
+    report("Setting SETUPTOOLS_SCM_PRETEND_VERSION to", repr(data['new_version']),
+           file=sys.stderr)
     os.environ['SETUPTOOLS_SCM_PRETEND_VERSION'] = data['new_version']

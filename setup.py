@@ -16,6 +16,9 @@ entry_points = {
         # XXX: This only works doing fullrelease
         'scm_middle = icrs.releaser.setuptools_scm_versionfixer:prereleaser_middle',
     ],
+    'console_scripts': [
+        'icrs_release = icrs.releaser.fullrelease:main',
+    ]
 }
 
 TESTS_REQUIRE = [
@@ -68,6 +71,7 @@ setup(
         'docs': [
             'Sphinx',
             'furo',
+            'sphinxcontrib-programoutput',
         ] + TESTS_REQUIRE,
     },
     python_requires=">=3.8",

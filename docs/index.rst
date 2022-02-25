@@ -1,6 +1,9 @@
 .. include:: ../README.rst
-   :start-after: sphinx-include-begin-prelude
-   :end-before: sphinx-include-after-prelude
+
+Usage From The Command Line
+===========================
+
+.. command-output:: icrs_release --help
 
 ====================
  Indices and tables

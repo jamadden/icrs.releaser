@@ -44,6 +44,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
+    'sphinxcontrib.programoutput',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -63,16 +64,16 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'icrs.releaser'
-copyright = u'2016--2017, NextThought'
-author = u'Jason Madden'
+project = 'icrs.releaser'
+copyright = '2022, Jason Madden'
+author = 'Jason Madden'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The short X.Y version.
-version = '%s.%s.%s' % tuple(map(int, rqmt.version.split('.')[:3]))
+version = '%s.%s' % tuple(rqmt.version.split('.')[:2])
 # The full version, including alpha/beta/rc tags.
 release = rqmt.version
 
@@ -287,8 +288,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'ntiwebhooks.tex', u'icrs.releaser Documentation',
-     u'Jason madden', 'manual'),
+    (master_doc, 'ntiwebhooks.tex', 'icrs.releaser Documentation',
+     'Jason madden', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -329,7 +330,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'ntiwebhooks', u'icrs.releaser Documentation',
+    (master_doc, 'ntiwebhooks', 'icrs.releaser Documentation',
      [author], 1)
 ]
 
@@ -344,8 +345,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'ntiwebhooks', u'icrs.releaser Documentation',
-     author, 'ntiwebhooks', 'One line description of project.',
+    (master_doc, 'icrsreleaser', 'icrs.releaser Documentation',
+     author, 'icrsreleaser', 'One line description of project.',
      'Miscellaneous'),
 ]
 
@@ -369,7 +370,7 @@ texinfo_documents = [
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
     'https://docs.python.org/': None,
-    'https://zestreleaser.readthedocs.io/en/master/': None,
+    'https://zestreleaser.readthedocs.io/en/latest/': None,
 }
 
 extlinks = {'issue': ('https://github.com/jamadden/icrs.releaser/issues/%s',

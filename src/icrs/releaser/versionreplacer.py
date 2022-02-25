@@ -84,8 +84,6 @@ def prereleaser_middle(data):
       ``data['name']`` which in turn comes from setup.py.
 
     .. todo: This does not look at .rst files in the ``docs/`` directory.
-
-    .. versionadded:: 0.0.1
     """
     base_dir = _find_replacement_directory(data)
     new_version_bytes = _new_version_bytes(data)

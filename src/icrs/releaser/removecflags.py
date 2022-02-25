@@ -11,8 +11,6 @@ def prereleaser_before(data): # pylint:disable=unused-argument
     """
     Strip CFLAGS and other compile settings that
     may not be portable.
-
-    .. versionadded:: 0.0.1
     """
     # Especially CFLAGS. If this is compiled in a newer machine with a
     # setting like -march=native, it will produce wheels that won't

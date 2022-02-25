@@ -27,7 +27,7 @@ class TestFuncs(unittest.TestCase):
             'LDFLAGS',
         )
         # Make sure it doesn't pre-exist
-        os.environ.pop('CXXFLAGS')
+        os.environ.pop('CXXFLAGS', None)
 
         for k in FLAGS:
             os.environ[k] = k

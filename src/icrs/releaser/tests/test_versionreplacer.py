@@ -57,6 +57,96 @@ class TestFuncs(unittest.TestCase):
             with self.assertRaises(FileNotFoundError):
                 versionreplacer._find_replacement_directory(data)
 
+    def check_find_replacement_directory_namespace(self, project_name, *dir_names):
+        with tempfile.TemporaryDirectory() as tmp:
+            for dir_name in dir_names:
+                project_dir = os.path.join(tmp, 'src', dir_name)
+                os.makedirs(project_dir)
+            data = {
+                'reporoot': tmp,
+                'name': project_name
+            }
+            reports = []
+            def report(*msg):
+                reports.append(msg)
+            found = versionreplacer._find_replacement_directory(data, report)
+            return tmp, found, reports
+
+    def check_find_replacement_directory_namespace_match(self, project_name, dir_name, *other_dirs):
+        tmp_dir, found, reports = self.check_find_replacement_directory_namespace(
+            project_name,
+            dir_name,
+            *other_dirs
+        )
+        self.assertEqual(found, os.path.join(tmp_dir, 'src', dir_name))
+        return reports
+
+    def test_find_replacement_directory_namespace_legacy_exact_match(self):
+        project_name ='icrs.data-model'
+        dir_name = 'data-model'
+        reports = self.check_find_replacement_directory_namespace_match(project_name, dir_name)
+        self.assertEqual(
+            reports[0][1],
+            "But project name ('icrs.data-model') is a namespace"
+        )
+
+    def test_find_replacement_directory_namespace_legacy_normalized_match1(self):
+        project_name ='icrs.data_model'
+        dir_name = 'data-model'
+        reports = self.check_find_replacement_directory_namespace_match(project_name, dir_name)
+        self.assertEqual(
+            reports[0][1],
+            "But project name ('icrs.data_model') is a namespace"
+        )
+        self.assertEqual(
+            reports[0][2],
+            "so we will look for the legacy directory 'data_model'",
+        )
+
+    def test_find_replacement_directory_namespace_legacy_normalized_match2(self):
+        project_name ='icrs.data-model'
+        dir_name = 'data_model'
+        reports = self.check_find_replacement_directory_namespace_match(project_name, dir_name)
+        self.assertEqual(
+            reports[0][1],
+            "But project name ('icrs.data-model') is a namespace"
+        )
+        self.assertEqual(
+            reports[0][2],
+            "so we will look for the legacy directory 'data-model'",
+        )
+
+    def test_find_replacement_directory_namespace_legacy_normalized_match_w_egginfo(self):
+        project_name ='icrs.data-model'
+        dir_name = 'data_model'
+        egg_info = project_name + '.egg-info'
+        reports = self.check_find_replacement_directory_namespace_match(project_name,
+                                                                        dir_name, egg_info)
+        self.assertEqual(
+            reports[0][1],
+            "But project name ('icrs.data-model') is a namespace"
+        )
+        self.assertEqual(
+            reports[0][2],
+            "so we will look for the legacy directory 'data-model'",
+        )
+
+    def test_find_replacement_directory_namespace_legacy_normalized_no_match(self):
+        with self.assertRaisesRegex(FileNotFoundError, r"Looked for.*data-model.*only found \[\]"):
+            self.check_find_replacement_directory_namespace('icrs.data-model', 'bad_dir')
+
+    def test_find_replacement_directory_namespace_legacy_normalized_many_matches(self):
+        with self.assertRaisesRegex(FileNotFoundError,
+                                    r"Looked for.*data-model.*only found "
+                                    r"\['data-model', 'data_model'\]"):
+            self.check_find_replacement_directory_namespace(
+                'icrs.data-model',
+                # Both normalized forms
+                'data-model', 'data_model',
+                # Two egg infos
+                'data_model.egg-info', 'icrs.data_model.egg-info',
+            )
+
     def _setup_one_file(self, tmp_dir):
         import textwrap
         src = os.path.join(tmp_dir, 'src', 'project')

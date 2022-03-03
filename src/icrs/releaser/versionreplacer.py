@@ -28,12 +28,33 @@ def _new_version_bytes(data):
         new_version_bytes = new_version
     return new_version_bytes
 
-def _find_replacement_directory(data):
+def _find_replacement_directory(data, report=print):
     # Return the directory to begin replacing in, or
     # raise an exception
-    base_dir = os.path.join(data['reporoot'], 'src', _project_name(data))
+    src_dir = os.path.join(data['reporoot'], 'src')
+    base_dir = os.path.join(src_dir, _project_name(data))
     if not os.path.exists(base_dir):
-        raise FileNotFoundError(f"Unable to find source directory at {base_dir!r}")
+        not_found_msg = f"Unable to find source directory at {base_dir!r}."
+        if '.' not in data['name']:
+            raise FileNotFoundError(not_found_msg)
+        local = data['name'].split('.')[1]
+        report(not_found_msg,
+               f"But project name ({data['name']!r}) is a namespace",
+               f"so we will look for the legacy directory {local!r}")
+        normalized = local.replace('_', '-')
+        matches = [
+            x
+            for x in os.listdir(src_dir)
+            if x.replace('_', '-') == normalized
+        ]
+        if len(matches) == 1:
+            base_dir = os.path.join(src_dir, matches[0])
+        else:
+            matches.sort() # stability for testing
+            raise FileNotFoundError(
+                "Unable to find any matching source directory. "
+                f"Looked for {local!r} in {src_dir!r} but only found {matches}."
+            )
     return base_dir
 
 # What we search for
@@ -61,29 +82,49 @@ def prereleaser_middle(data):
 
     The prerelease step:
 
-        * asks you for a version number
-        * updates the setup.py or version.txt and the
+        - asks you for a version number
+
+        - updates the setup.py or version.txt and the
           CHANGES/HISTORY/CHANGELOG file
-        * offers to commit those changes to git
+
+        - offers to commit those changes to git
 
     Within the middle hook:
 
-        * All data dictionary items are available and some questions
+        - All data dictionary items are available and some questions
           (like new version number) have been asked.
-        * No filesystem changes have been made yet.
 
+        - No filesystem changes have been made yet.
 
     This hook:
 
-    - Adds the version number to ``versionadded``, ``versionchanged`` and
-      ``deprecated`` directives in Python source.
+        - Adds the version number to ``versionadded``,
+          ``versionchanged`` and ``deprecated`` directives in Python
+          source.
 
     Assumptions:
 
-    - The source is found in ``src/{name}`` where ``name`` comes from
-      ``data['name']`` which in turn comes from setup.py.
+        - The source is found in ``src/{name}`` where ``name`` comes
+          from ``data['name']`` which in turn comes from setup.py.
 
-    .. todo: This does not look at .rst files in the ``docs/`` directory.
+        - If the project name contains a period (``zope.interface``),
+          then it should be a namespace package, and we'll look in
+          ``src/zope/``.
+
+        - As a special case for legacy code that wants to name the
+          project different from the that directory does not exist,
+          and exactly one directory matching the *second* part does
+          exist, import name during a transition to namespaces, if the
+          name contains a period, but use that. The second part is
+          compared ignoring normalization, so ``icrs.foo_bar`` would
+          match ``src/foo_bar`` or ``src/foo-bar``.
+
+    .. todo:
+       This does not look at .rst files in the ``docs/``
+       directory.
+
+    .. versionchanged:: NEXT
+       Support pseudo-namespace packages.
     """
     base_dir = _find_replacement_directory(data)
     new_version_bytes = _new_version_bytes(data)

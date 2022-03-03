@@ -123,7 +123,7 @@ def prereleaser_middle(data):
        This does not look at .rst files in the ``docs/``
        directory.
 
-    .. versionchanged:: NEXT
+    .. versionchanged:: 1.1.0
        Support pseudo-namespace packages.
     """
     base_dir = _find_replacement_directory(data)

@@ -4,7 +4,7 @@ import codecs
 from setuptools import setup, find_packages
 
 
-version = '1.0.2.dev0'
+version = '1.1.0'
 
 entry_points = {
     'zest.releaser.prereleaser.before': [

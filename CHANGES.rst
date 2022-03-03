@@ -2,7 +2,7 @@
  Changes
 =========
 
-1.1.0 (unreleased)
+1.1.0 (2022-03-03)
 ==================
 
 - Fix handling the case where the project name is a namespace

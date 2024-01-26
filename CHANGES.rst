@@ -2,10 +2,13 @@
  Changes
 =========
 
-1.1.1 (unreleased)
+1.2.0 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Add support for Python 3.11 and 3.12.
+- Depend on newer ``zest.releaser >. 9.1.1``.
+- Remove dependency on setuptools; now uses the poorly desgined
+  "native" namespace packages.
 
 
 1.1.0 (2022-03-03)

@@ -1,7 +1,8 @@
 # Copyright 2020 NextThought
 # Released under the terms of the LICENSE file.
 import codecs
-from setuptools import setup, find_packages
+from setuptools import setup
+from setuptools import find_namespace_packages
 
 
 version = '1.1.1.dev0'
@@ -15,6 +16,7 @@ entry_points = {
         'version_next = icrs.releaser.versionreplacer:prereleaser_middle',
         # XXX: This only works doing fullrelease
         'scm_middle = icrs.releaser.setuptools_scm_versionfixer:prereleaser_middle',
+        # XXX: Add check for .dev.
     ],
     'console_scripts': [
         'icrs_release = icrs.releaser.fullrelease:main',
@@ -34,7 +36,7 @@ setup(
     name='icrs.releaser',
     version=version,
     author='Jason Madden',
-    author_email='jason@nextthought.com',
+    author_email='jason@seecoresoftware.com',
     description="zest.releaser/setuptools_scm plugin.",
     long_description=_read('README.rst') + '\n\n' + _read('CHANGES.rst'),
     license='Apache',
@@ -51,18 +53,19 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Development Status :: 1 - Planning',
     ],
     zip_safe=False,
-    packages=find_packages('src'),
+    packages=find_namespace_packages(where='src'),
     package_dir={'': 'src'},
     namespace_packages=['icrs'],
     install_requires=[
-        'setuptools',
         'setuptools_scm',
-        'zest.releaser',
+        'zest.releaser >= 9.1.1',
     ],
     entry_points=entry_points,
     include_package_data=True,

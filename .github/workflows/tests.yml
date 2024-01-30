@@ -29,7 +29,7 @@ jobs:
         python -m pip install -U -e ".[test,docs]"
     - name: Test
       run: |
-        coverage run -m zope.testrunner --test-path=src  --auto-color --auto-progress
+        coverage run -m zope.testrunner --package-path src/icrs/releaser icrs.releaser  --auto-color --auto-progress
         coverage run -a -m sphinx -b doctest -d docs/_build/doctrees docs docs/_build/doctests
     - name: Submit to Coveralls
       # This is a container action, which only runs on Linux.

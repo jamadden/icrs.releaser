@@ -11,7 +11,7 @@ jobs:
   test:
     strategy:
       matrix:
-        python-version: ['3.8', '3.9', '3.10', 'pypy-3.10', '3.11', '3.12']
+        python-version: ['3.9', '3.10', 'pypy-3.10', '3.11', '3.12']
 
     runs-on: ubuntu-latest
     steps:
@@ -29,8 +29,10 @@ jobs:
         python -m pip install -U -e ".[test,docs]"
     - name: Test
       run: |
-        coverage run -m zope.testrunner --test-path=src  --auto-color --auto-progress
-        coverage run -a -m sphinx -b doctest -d docs/_build/doctrees docs docs/_build/doctests
+        coverage run -m zope.testrunner --package-path src/icrs/releaser icrs.releaser  --auto-color --auto-progress
+        coverage run -m sphinx -b doctest -d docs/_build/doctrees docs docs/_build/doctests
+        coverage combine
+        coverage report
     - name: Submit to Coveralls
       # This is a container action, which only runs on Linux.
       uses: AndreMiras/coveralls-python-action@develop

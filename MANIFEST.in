@@ -18,4 +18,6 @@ recursive-include docs *.py
 recursive-include docs *.rst
 recursive-include docs *.css
 recursive-include docs Makefile
+
 recursive-include src *.zcml
+recursive-include src *.txt

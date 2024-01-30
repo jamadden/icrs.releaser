@@ -4,6 +4,8 @@ source_pkgs = icrs.releaser
 # Perhaps this obsoletes the source section in [paths]?
 relative_files = True
 branch = true
+parallel = true
+concurrency = thread
 
 [report]
 # Coverage is run on Linux under cPython 2 and 3,

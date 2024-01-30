@@ -6,6 +6,7 @@
 ==================
 
 - Add support for Python 3.11 and 3.12.
+- Drop support for Python 3.8. The minimum supported version is now 3.9.
 - Depend on newer ``zest.releaser >= 9.1.1``.
 - Remove dependency on setuptools; now uses the so-called
   "native" namespace packages.

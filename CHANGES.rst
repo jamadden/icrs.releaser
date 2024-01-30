@@ -6,9 +6,12 @@
 ==================
 
 - Add support for Python 3.11 and 3.12.
-- Depend on newer ``zest.releaser >. 9.1.1``.
-- Remove dependency on setuptools; now uses the poorly desgined
+- Depend on newer ``zest.releaser >= 9.1.1``.
+- Remove dependency on setuptools; now uses the so-called
   "native" namespace packages.
+- Add a new release check that forbids having development dependencies
+  (e.g., "icrs.releaser >= 3.0.dev0" would be forbidden). This only
+  works for ``setuptools`` projects that have dependencies listed in setup.py.
 
 
 1.1.0 (2022-03-03)

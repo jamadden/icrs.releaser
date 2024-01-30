@@ -1,3 +1,4 @@
+# pragma: no cover
 # Copyright 2020 NextThought
 # Released under the terms of the LICENSE file.
 import codecs
@@ -64,6 +65,7 @@ setup(
     package_dir={'': 'src'},
     namespace_packages=['icrs'],
     install_requires=[
+        # Placeholder
         'zest.releaser >= 9.1.1',
     ],
     entry_points=entry_points,

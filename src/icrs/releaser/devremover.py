@@ -45,13 +45,16 @@ _SETUP_PY_DEV_REQUIREMENT_MATCHER = re.compile(
     br"['\"]"
 )
 
-def prereleaser_middle(data):
+def prereleaser_before(data):
     """
     Checks for development dependencies and raise an error
     if found.
 
     A non-released dependency is something in setup.py that has a version number
-    containing ".dev".
+    containing ".dev". An exception is raised if this is found.
+
+    This is a "prereleaser before" hook so that it runs before anything
+    tries to commit to the project (e.g., to update the version number).
 
     .. todo::
 

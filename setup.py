@@ -5,10 +5,11 @@ from setuptools import setup
 from setuptools import find_namespace_packages
 
 
-version = '1.1.1.dev0'
+version = '1.2.0'
 
 entry_points = {
     'zest.releaser.prereleaser.before': [
+        'dev_middle = icrs.releaser.devremover:prereleaser_before',
         # XXX: This only works doing fullrelease
         'rm_cflags = icrs.releaser.removecflags:prereleaser_before',
     ],
@@ -16,7 +17,7 @@ entry_points = {
         'version_next = icrs.releaser.versionreplacer:prereleaser_middle',
         # XXX: This only works doing fullrelease
         'scm_middle = icrs.releaser.setuptools_scm_versionfixer:prereleaser_middle',
-        'dev_middle = icrs.releaser.devremover:prereleaser_middle',
+
     ],
     'console_scripts': [
         'icrs_release = icrs.releaser.fullrelease:main',

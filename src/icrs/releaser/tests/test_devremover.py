@@ -80,12 +80,12 @@ class TestPrereleaser(unittest.TestCase):
         self._reports.append(args)
 
     def _callFUT(self, data_dir):
-        from ..devremover import prereleaser_middle
+        from ..devremover import prereleaser_before as fut
         data = {
             'reporoot': data_dir,
             'icrs.releaser:report': self._report,
         }
-        return prereleaser_middle(data)
+        return fut(data)
 
     def test_no_dev_dep(self):
         with tempfile.TemporaryDirectory(prefix='icrs_releaser_') as td:

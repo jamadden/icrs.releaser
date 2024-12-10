@@ -5,7 +5,7 @@ from setuptools import setup
 from setuptools import find_namespace_packages
 
 
-version = '1.3.0'
+version = '1.3.1.dev0'
 
 entry_points = {
     'zest.releaser.prereleaser.before': [

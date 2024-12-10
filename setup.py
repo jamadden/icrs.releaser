@@ -55,6 +55,7 @@ setup(
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
         'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Development Status :: 1 - Planning',
@@ -62,7 +63,6 @@ setup(
     zip_safe=False,
     packages=find_namespace_packages(where='src'),
     package_dir={'': 'src'},
-    namespace_packages=['icrs'],
     install_requires=[
         'zest.releaser >= 9.1.1',
     ],

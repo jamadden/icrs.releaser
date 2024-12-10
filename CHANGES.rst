@@ -2,10 +2,11 @@
  Changes
 =========
 
-1.2.1 (unreleased)
+1.3.0 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Use native ``pkgutil`` style namespace package.
+- Add support for Python 3.13.
 
 
 1.2.0 (2024-01-30)

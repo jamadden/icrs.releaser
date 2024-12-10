@@ -2,7 +2,7 @@
  Changes
 =========
 
-1.3.0 (unreleased)
+1.3.0 (2024-12-10)
 ==================
 
 - Use native ``pkgutil`` style namespace package.
